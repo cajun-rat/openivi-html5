@@ -15,6 +15,9 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -35,6 +38,9 @@
         <height>300</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarAlwaysOff</enum>
       </property>
@@ -47,15 +53,18 @@
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="simcontrols_">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <property name="topMargin">
-       <number>9</number>
+       <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>9</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>9</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QPushButton" name="pushButton">
@@ -84,11 +93,30 @@
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QPushButton" name="fullscreen_">
+        <property name="toolTip">
+         <string>Display the window in full screen (F11)</string>
+        </property>
+        <property name="text">
+         <string>Full Screen</string>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QMenuBar" name="menuBar_">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -107,7 +135,7 @@
    </widget>
    <addaction name="menu_File"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar_"/>
   <action name="action_Quit">
    <property name="text">
     <string>&amp;Quit</string>
