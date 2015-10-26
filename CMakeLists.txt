@@ -4,7 +4,8 @@ project(openivi-html5)
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
 # Tell CMake to run the UI compiler when necessary
-SET(CMAKE_AUTOUIC ON) 
+# SET(CMAKE_AUTOUIC ON)
+# Only available in cmake 3.0. yocto only has cmake 2.8.12
 
 # As moc files are generated in the binary dir, tell CMake
 # to always look for includes there:
@@ -16,7 +17,8 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5WebKitWidgets REQUIRED)
 find_package(Qt5DBus REQUIRED)
 
-add_executable(openivi-html5 main.cc mainwindow.cc mainwindow.ui webgraphicview.cc)
+qt5_wrap_ui(UI_MAINWINDOW mainwindow.ui)
+add_executable(openivi-html5 main.cc mainwindow.cc webgraphicview.cc ${UI_MAINWINDOW})
 qt5_use_modules(openivi-html5 Widgets DBus WebKitWidgets)
 
 message("Build type is ${CMAKE_BUILD_TYPE}")
