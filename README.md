@@ -10,7 +10,9 @@ It supports two modes of operation:
 
 Install dependencies
 
-	sudo apt-get install qt5base5-dev libqt5dbus5 libqt5webkit5-dbg
+    sudo apt-get update
+    sudo apt-get install build-essential cmake libgles2-mesa-dev libegl1-mesa-dev libwayland-dev qtbase5-dev
+    sudo apt-get install libqt5dbus5 libqt5webkit5-dev exuberant-ctags
 
 Create a build directory and configure the build with cmake
 
