@@ -1,0 +1,16 @@
+<node name="/org/onboard/Onboard/Keyboard">
+  <interface name="org.freedesktop.DBus.Introspectable">
+    <method name="Introspect">
+      <arg direction="out" type="s" />
+    </method>
+  </interface>
+  <interface name="org.onboard.Onboard.Keyboard">
+    <method name="ToggleVisible">
+    </method>
+    <method name="Hide">
+    </method>
+    <method name="Show">
+    </method>
+    <property name="Visible" type="b" access="read"/>
+  </interface>
+</node>

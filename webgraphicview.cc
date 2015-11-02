@@ -19,29 +19,39 @@
 
 #include "webgraphicview.h"
 
+#include <QWebFrame>
 #include <QtDBus/QDBusMessage>
 #include <QtDBus/QDBusConnection>
+#include <QtWebKit/QtWebKit>
 
-WebGraphicView::WebGraphicView(QWidget *parent) : QGraphicsView(parent) {
-  page_ = new QWebPage(parent);
+WebGraphicView::WebGraphicView(QWidget *parent)
+  : QGraphicsView(parent),
+    page_(new QWebPage(this)),
+    view_(new QGraphicsWebView),
+    scene_(new QGraphicsScene(this)),
+    webInspector_(new QWebInspector),
+    onboard_(new OrgOnboardOnboardKeyboardInterface("org.onboard.Onboard", QString("/org/onboard/Onboard/Keyboard"), QDBusConnection::sessionBus(), this))
+  {
   page_->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,
                                   true);
-
-  view_ = new QGraphicsWebView;
+  page_->setProperty("_q_webInspectorServerPort", 9221);
+  connect(page_->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(AddJavascriptObjectsToWindow()));
   view_->setPage(page_);
-  scene_ = new QGraphicsScene(parent);
 
   setScene(scene_);
   scene_->addItem(view_);
-  webInspector_ = new QWebInspector();
   webInspector_->setPage(page_);
-  // webInspector_->setVisible(true);
+
   connect(page_, SIGNAL(microFocusChanged()), this, SLOT(FocusUpdate()));
+
 }
 
-WebGraphicView::~WebGraphicView() { delete view_; }
+WebGraphicView::~WebGraphicView() {
+  delete view_;
+  delete webInspector_;
+}
 
 void WebGraphicView::resizeEvent(QResizeEvent *event) {
   view_->resize(this->size());
@@ -51,47 +61,23 @@ void WebGraphicView::resizeEvent(QResizeEvent *event) {
 void WebGraphicView::SetUrl(const QUrl &url) { view_->setUrl(url); }
 
 void WebGraphicView::FocusUpdate() {
-  // fixSize();
-  /* qDebug() << "Got focus update";
-  qDebug() << "ImEnabled" << page->inputMethodQuery(Qt::ImEnabled);
-  qDebug() << "ImMicroFocus" << page->inputMethodQuery(Qt::ImMicroFocus);
-  qDebug() << "ImCursorRectangle" <<
-  page->inputMethodQuery(Qt::ImCursorRectangle);
-  qDebug() << "ImFont" << page->inputMethodQuery(Qt::ImFont);
-  qDebug() << "ImCursorPosition" <<
-  page->inputMethodQuery(Qt::ImCursorPosition);
-  qDebug() << "ImSurroundingText" <<
-  page->inputMethodQuery(Qt::ImSurroundingText);
-  qDebug() << "ImCurrentSelection" <<
-  page->inputMethodQuery(Qt::ImCurrentSelection);
-  qDebug() << "ImMaximumTextLength" <<
-  page->inputMethodQuery(Qt::ImMaximumTextLength);
-  qDebug() << "ImAnchorPosition" <<
-  page->inputMethodQuery(Qt::ImAnchorPosition);
-  qDebug() << "ImHints" << page->inputMethodQuery(Qt::ImHints);
-  qDebug() << "ImPreferredLanguage" <<
-  page->inputMethodQuery(Qt::ImPreferredLanguage);
-  qDebug() << "ImPlatformData" << page->inputMethodQuery(Qt::ImPlatformData);
-  qDebug() << "ImAbsolutePosition" <<
-  page->inputMethodQuery(Qt::ImAbsolutePosition);
-  qDebug() << "ImTextBeforeCursor" <<
-  page->inputMethodQuery(Qt::ImTextBeforeCursor);
-  qDebug() << "ImTextAfterCursor" <<
-  page->inputMethodQuery(Qt::ImTextAfterCursor);
-  qDebug() << "ImQueryAll" << page->inputMethodQuery(Qt::ImQueryAll); */
-
   QVariant r = page_->inputMethodQuery(Qt::ImSurroundingText);
   bool shouldDisplayKeyboard = r.isValid();
   if (keyboardVisible_ != shouldDisplayKeyboard) {
-    qDebug() << "Need to" << (shouldDisplayKeyboard ? "show" : "hide")
-             << "keyboard";
-    // TODO debounce
-    QDBusMessage m = QDBusMessage::createMethodCall(
-        "org.onboard.Onboard", "/org/onboard/Onboard/Keyboard", "",
-        (shouldDisplayKeyboard ? "Show" : "Hide"));
-
-    QDBusConnection::sessionBus().send(m);
+    if (shouldDisplayKeyboard) {
+      auto r = onboard_->Show();
+      r.waitForFinished();
+    } else {
+      auto r = onboard_->Hide();
+      r.waitForFinished();
+    }
     keyboardVisible_ = shouldDisplayKeyboard;
   }
 }
+
+void WebGraphicView::AddJavascriptObjectsToWindow() {
+  page_->currentFrame()->addToJavaScriptWindowObject("test", &softwareLoadingManager_);
+  page_->currentFrame()->addToJavaScriptWindowObject("onboard", onboard_);
+}
+
 /* vim: set expandtab tabstop=2 shiftwidth=2: */

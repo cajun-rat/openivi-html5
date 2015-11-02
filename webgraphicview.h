@@ -26,6 +26,9 @@
 #include <QWebInspector>
 #include <QWebPage>
 
+#include "softwareloadingmanager.h"
+#include "onboardinterface.h"
+
 class WebGraphicView : public QGraphicsView {
   Q_OBJECT
 
@@ -40,12 +43,16 @@ class WebGraphicView : public QGraphicsView {
  public slots:
   void FocusUpdate();
 
+ private slots:
+  void AddJavascriptObjectsToWindow();
  private:
   bool keyboardVisible_;
   QWebPage *page_;
   QGraphicsWebView *view_;
   QGraphicsScene *scene_;
   QWebInspector *webInspector_;
+  SoftwareLoadingManager softwareLoadingManager_;
+  org::onboard::Onboard::Keyboard *onboard_;
 };
 
 /* vim: set expandtab tabstop=2 shiftwidth=2: */
