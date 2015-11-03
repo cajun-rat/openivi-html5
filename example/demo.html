@@ -1,0 +1,43 @@
+<!doctype html5>
+<html>
+<head>
+	<title>OpenIVI Demo</title>
+</head>
+<body>
+<h2>SOTA</h2>
+<p id="update_state">?</p>
+<p>There are <span id="update_count">?</span> updates available</p>
+<input id="approve" type="button" value="Approve Updates"/>
+
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+
+var update_states = {
+	NO_UPDATES:1,
+	AWAITING_APPROVAL:2,
+	INSTALLING:3,
+	ERROR:4
+};
+
+var update_states_desc = {}
+update_states_desc[update_states.NO_UPDATES] = "No Updates Available";
+update_states_desc[update_states.AWAITING_APPROVAL] = "Awaiting Approval";
+update_states_desc[update_states.INSTALLING] = "Installing";
+update_states_desc[update_states.ERROR] = "Error";
+
+
+function init() {
+	genivi.slm.update_state_changed.connect(function (state,count) {
+		$('#update_state').text(update_states_desc[state]);
+		$('#update_count').text(count);
+	});
+	$('#update_state').text(update_states_desc[genivi.slm.update_state()]);
+	$('#update_count').text(genivi.slm.update_count());
+	$('#approve').click(function () {slm.approve()});
+}
+
+
+$(init);
+</script>
+</body>
+</html>
