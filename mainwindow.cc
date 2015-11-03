@@ -35,7 +35,8 @@ MainWindow::MainWindow(QWidget *parent, const QUrl &force_url)
 
   if (force_url.isEmpty()) {
     QSettings settings;
-    QUrl startingUrl = settings.value("homepage", "about:blank").toUrl();
+    QUrl startingUrl =
+        settings.value("homepage", "qrc:/help/welcome.html").toUrl();
     SetUrl(startingUrl);
   } else {
     SetUrl(force_url);

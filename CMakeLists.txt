@@ -20,10 +20,11 @@ find_package(Qt5DBus REQUIRED)
 qt5_wrap_ui(UI_MAINWINDOW mainwindow.ui)
 
 qt5_add_dbus_interfaces(DBUS_FILES onboard.xml softwareloadingmanager.xml)
+qt5_add_resources(RCC_FILES resources/resources.qrc)
 
 add_executable(openivi-html5
-	main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
-	${DBUS_FILES} ${UI_MAINWINDOW})
+        main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
+        ${DBUS_FILES} ${RCC_FILES} ${UI_MAINWINDOW})
 
 qt5_use_modules(openivi-html5 Widgets DBus WebKitWidgets)
 
