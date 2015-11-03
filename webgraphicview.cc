@@ -24,14 +24,21 @@
 #include <QtDBus/QDBusConnection>
 #include <QtWebKit/QtWebKit>
 
+#include "softwareloadingmanager.h"
+
+using org::genivi::software_loading_manager;
+using org::onboard::Onboard::Keyboard;
+
 WebGraphicView::WebGraphicView(QWidget *parent)
-  : QGraphicsView(parent),
-    page_(new QWebPage(this)),
-    view_(new QGraphicsWebView),
-    scene_(new QGraphicsScene(this)),
-    webInspector_(new QWebInspector),
-    onboard_(new OrgOnboardOnboardKeyboardInterface("org.onboard.Onboard", QString("/org/onboard/Onboard/Keyboard"), QDBusConnection::sessionBus(), this))
-  {
+    : QGraphicsView(parent),
+      page_(new QWebPage(this)),
+      view_(new QGraphicsWebView),
+      scene_(new QGraphicsScene(this)),
+      webInspector_(new QWebInspector),
+      softwareLoadingManager_(new SoftwareLoadingManager(this)),
+      onboard_(new Keyboard("org.onboard.Onboard",
+                            QString("/org/onboard/Onboard/Keyboard"),
+                            QDBusConnection::sessionBus(), this)) {
   page_->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,
@@ -76,8 +83,11 @@ void WebGraphicView::FocusUpdate() {
 }
 
 void WebGraphicView::AddJavascriptObjectsToWindow() {
-  page_->currentFrame()->addToJavaScriptWindowObject("test", &softwareLoadingManager_);
+  page_->currentFrame()->addToJavaScriptWindowObject("slm",
+                                                     softwareLoadingManager_);
   page_->currentFrame()->addToJavaScriptWindowObject("onboard", onboard_);
+
+  page_->currentFrame()->evaluateJavaScript("genivi = {slm:slm}");
 }
 
 /* vim: set expandtab tabstop=2 shiftwidth=2: */

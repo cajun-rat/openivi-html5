@@ -51,7 +51,7 @@ class WebGraphicView : public QGraphicsView {
   QGraphicsWebView *view_;
   QGraphicsScene *scene_;
   QWebInspector *webInspector_;
-  SoftwareLoadingManager softwareLoadingManager_;
+  SoftwareLoadingManager *softwareLoadingManager_;
   org::onboard::Onboard::Keyboard *onboard_;
 };
 
