@@ -2,8 +2,8 @@
 #define OPENIVI_WEBGRAPHICVIEW_H_
 
 /*
-    OpenIVI HTML5 environment 
-    Copyright (C) 2015 ATS Advanced Telematic Systems GmbH 
+    OpenIVI HTML5 environment
+    Copyright (C) 2015 ATS Advanced Telematic Systems GmbH
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -45,6 +45,7 @@ class WebGraphicView : public QGraphicsView {
 
  private slots:
   void AddJavascriptObjectsToWindow();
+
  private:
   bool keyboardVisible_;
   QWebPage *page_;
