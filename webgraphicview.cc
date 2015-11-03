@@ -44,7 +44,8 @@ WebGraphicView::WebGraphicView(QWidget *parent)
   page_->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,
                                   true);
   page_->setProperty("_q_webInspectorServerPort", 9221);
-  connect(page_->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(AddJavascriptObjectsToWindow()));
+  connect(page_->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this,
+          SLOT(AddJavascriptObjectsToWindow()));
   view_->setPage(page_);
 
   setScene(scene_);
@@ -52,7 +53,6 @@ WebGraphicView::WebGraphicView(QWidget *parent)
   webInspector_->setPage(page_);
 
   connect(page_, SIGNAL(microFocusChanged()), this, SLOT(FocusUpdate()));
-
 }
 
 WebGraphicView::~WebGraphicView() {
