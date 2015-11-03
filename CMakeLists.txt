@@ -18,9 +18,13 @@ find_package(Qt5WebKitWidgets REQUIRED)
 find_package(Qt5DBus REQUIRED)
 
 qt5_wrap_ui(UI_MAINWINDOW mainwindow.ui)
-qt5_add_dbus_interfaces(DBUS_FILES onboard.xml)
 
-add_executable(openivi-html5 main.cc mainwindow.cc softwareloadingmanager.cc webgraphicview.cc ${DBUS_FILES} ${UI_MAINWINDOW})
+qt5_add_dbus_interfaces(DBUS_FILES onboard.xml softwareloadingmanager.xml)
+
+add_executable(openivi-html5
+	main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
+	${DBUS_FILES} ${UI_MAINWINDOW})
+
 qt5_use_modules(openivi-html5 Widgets DBus WebKitWidgets)
 
 message("Build type is ${CMAKE_BUILD_TYPE}")
