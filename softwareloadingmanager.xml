@@ -1,0 +1,17 @@
+<node name="/org/genivi/software_loading_manager">
+  <interface name="org.genivi.software_loading_manager">
+    <method name="update_count">
+      <arg name="count" type="i" direction="out"/>
+    </method>
+    <method name="update_state">
+      <arg name="state" type="i" direction="out"/>
+    </method>
+    <signal name="update_state_changed">
+      <arg name="state" type="i"/>
+      <arg name="count" type="i"/>
+    </signal>
+    <method name="approve">
+    </method>
+  </interface>
+</node>
+<!-- vim: set expandtab tabstop=2 shiftwidth=2: -->
