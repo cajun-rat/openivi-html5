@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/help">
+        <file>arrow.png</file>
+        <file>welcome.html</file>
+    </qresource>
+</RCC>

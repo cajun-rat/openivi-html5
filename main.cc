@@ -40,7 +40,17 @@ int main(int argc, char *argv[]) {
 
   parser.addOption(url);
 
+  QCommandLineOption clearSettings(QStringList() << "clear-settings",
+                                   qtr("Clear settings"));
+
+  parser.addOption(clearSettings);
   parser.process(a);
+
+  if (parser.isSet(clearSettings)) {
+    QSettings settings;
+    settings.clear();
+  }
+
   QString url_str = parser.value(url);
   MainWindow w(0, QUrl(url_str));
 
