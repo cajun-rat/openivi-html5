@@ -90,6 +90,12 @@ void WebGraphicView::AddJavascriptObjectsToWindow() {
 
   page_->currentFrame()->evaluateJavaScript("genivi = {slm:slm}");
 
+  page_->currentFrame()->evaluateJavaScript(
+      "navigator.geolocation = {"
+      "  watchPosition: function () {},"
+      "  getCurrentPosition: function () {}"
+      "};");
+
   page_->currentFrame()->addToJavaScriptWindowObject("car", car_);
 }
 
