@@ -24,6 +24,7 @@ qt5_add_resources(RCC_FILES resources/resources.qrc)
 
 add_executable(openivi-html5
         main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
+        car.cc
         ${DBUS_FILES} ${RCC_FILES} ${UI_MAINWINDOW})
 
 qt5_use_modules(openivi-html5 Widgets DBus WebKitWidgets)

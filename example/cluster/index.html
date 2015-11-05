@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+  <div class="needleParent" >
+    <div id="rpmNeedle" class="needle"></div>
+    <div id="engineCoolantNeedle" class="needle"></div>
+    <div id="oilTempNeedle" class="needle"></div>
+    <div class="centerCircle">
+      <div id="speed" >
+      <div class="row centerText">
+        <div id="velocity" class="rightAlignText" >0</div>
+        <div id="velocityUnits" class="leftAlignText" >MPH</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="iatgauge" class="gauge" >
+  <div id="iatNeedle" class="needle gaugeNeedle" ></div>
+  <div class="gaugetext">AMP</div>
+</div>
+<div id="loadgauge" class="gauge" >
+  <div id="loadNeedle" class="needle gaugeNeedle" ></div>
+  <div class="gaugetext lower">RANGE</div>
+</div>
+<script src="../jquery-1.11.3.min.js"></script>
+<script src="main.js"></script>
+</body>
+<!-- vim: set expandtab tabstop=2 shiftwidth=2: -->
+</html>
