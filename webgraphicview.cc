@@ -38,7 +38,8 @@ WebGraphicView::WebGraphicView(QWidget *parent)
       softwareLoadingManager_(new SoftwareLoadingManager(this)),
       onboard_(new Keyboard("org.onboard.Onboard",
                             QString("/org/onboard/Onboard/Keyboard"),
-                            QDBusConnection::sessionBus(), this)) {
+                            QDBusConnection::sessionBus(), this)),
+      car_(new Car(this)) {
   page_->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,
@@ -88,6 +89,8 @@ void WebGraphicView::AddJavascriptObjectsToWindow() {
   page_->currentFrame()->addToJavaScriptWindowObject("onboard", onboard_);
 
   page_->currentFrame()->evaluateJavaScript("genivi = {slm:slm}");
+
+  page_->currentFrame()->addToJavaScriptWindowObject("car", car_);
 }
 
 /* vim: set expandtab tabstop=2 shiftwidth=2: */

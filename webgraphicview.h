@@ -28,6 +28,7 @@
 
 #include "softwareloadingmanager.h"
 #include "onboardinterface.h"
+#include "car.h"
 
 class WebGraphicView : public QGraphicsView {
   Q_OBJECT
@@ -54,6 +55,7 @@ class WebGraphicView : public QGraphicsView {
   QWebInspector *webInspector_;
   SoftwareLoadingManager *softwareLoadingManager_;
   org::onboard::Onboard::Keyboard *onboard_;
+  Car *car_;
 };
 
 /* vim: set expandtab tabstop=2 shiftwidth=2: */

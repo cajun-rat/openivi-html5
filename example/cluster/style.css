@@ -1,0 +1,211 @@
+body {
+  margin: 0px;
+}
+
+#velocity {
+  width: auto;
+  font-size: 95px;
+  font-weight: bold;
+  color: white;
+  font-family: "droid sans";
+}
+
+#velocityUnits {
+  color: white;
+  font-family: "droid sans";
+  font-size: 15.5px;
+  font-weight: bold;
+}
+
+body {
+  background: url("assets/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+
+#speed {
+  margin-top: 110px;
+  margin-left: 79px;
+  width: 307px;
+  display: table;
+}
+
+.row {
+  display: table-row;
+  margin: 0px auto;
+}
+
+.underborder {
+  border-bottom: 2px solid black;
+  height: auto;
+}
+
+.centerText {
+  vertical-align: bottom;
+  margin-top: 103px;
+  margin-left: 21px;
+  width: 307px;
+}
+
+.leftAlignText {
+  width: 50%;
+  text-align: left;
+  font-family: "droid sans";
+  font-size: 20px;
+  color: white;
+  padding: 0px 10px;
+  display: table-cell;
+  font-weight: bold;
+}
+.rightAlignText {
+  width: 50%;
+  text-align: right;
+  font-family: "droid sans";
+  color: white;
+  font-size: 20px;
+  padding: 0px 10px;
+  display: table-cell;
+  font-weight: bold;
+}
+
+.middleText {
+  vertical-align: middle;
+}
+
+.needleParent {
+  position: relative;
+  background: url("assets/dial-main-bg.png") top left no-repeat;
+  height: 607px;
+  width: 626px;
+  top: 30px;
+  left: 50%;
+  margin-left: -313px;
+}
+
+.centerCircle {
+  position: absolute;
+  z-index: 140;
+  margin-top: 110px;
+  margin-left: 120px;
+  background: url("assets/dial-main-center-bg.png") top left no-repeat;
+  height: 390px;
+  width: 382px;
+  -webkit-border-radius: 250px;
+  -webkit-box-shadow: 10px 0px 25px #90211C;
+}
+
+.gauge {
+  position: absolute;
+  width: 132px;
+  height: 132px;
+  margin-left: -68px;
+}
+.needle {
+  position: absolute;
+}
+
+.dial {
+  position: relative;
+}
+
+#iatgauge {
+  background: url("assets/dial-200.png");
+  bottom: 30px;
+  left: 25%;
+}
+
+#loadgauge {
+  background: url("assets/dial-load-bg.png");
+  bottom: 30px;
+  left: 75%;
+}
+
+.gauge .gaugetext {
+  margin-top: 70px;
+  width: 100%;
+  color: #FFF;
+  font: 15.5px "droid sans";
+  font-weight: bold;
+  text-align: center;
+}
+.gauge .gaugetext.lower {
+  margin-top: 80px;
+}
+
+.gaugeNeedle {
+  height: 55px;
+  width: 3px;
+
+  left: 68px;
+  bottom: 68px;
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: all 1ms;
+  -webkit-border-radius: 5px;
+}
+
+#iatNeedle {
+  background-color: red;
+  -webkit-transform:rotate(143deg);
+  -webkit-transition: all 1000ms;
+}
+
+#loadNeedle {
+  background-color: red;
+  height: 55px;
+  width: 3px;
+  left: 50%;
+  bottom: 50%;
+  -webkit-transform:rotate(270deg);
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: all 1ms;
+  -webkit-border-radius: 5px;
+}
+
+#throttleNeedle {
+  background-color: red;
+  height: 55px;
+  width: 3px;
+  left: 50%;
+  bottom: 50%;
+  -webkit-transform:rotate(270deg);
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: all 1ms;
+  -webkit-border-radius: 5px;
+}
+
+#rpmNeedle {
+  z-index: 110;
+  background-color: #E89820;
+  height: 258px;
+  width: 17px;
+  left: 51%;
+  bottom: 51%;
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: all 100ms;
+  -webkit-border-radius: 17px;
+}
+
+#engineCoolantNeedle {
+  background-color: white;
+  height: 288px;
+  width: 7px;
+  left: 50%;
+  bottom: 50%;
+  -webkit-transform:rotate(340deg);
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: all 1ms;
+  -webkit-border-radius: 5px;
+}
+
+#oilTempNeedle {
+  background-color: white;
+  height: 288px;
+  width: 7px;
+  left: 50%;
+  bottom: 50%;
+  -webkit-transform:rotate(225deg);
+  -webkit-transform-origin: 50% 100%;
+  -webkit-transition: all 1ms;
+  -webkit-border-radius: 5px;
+}
+/* vim: set expandtab tabstop=2 shiftwidth=2: */
