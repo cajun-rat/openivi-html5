@@ -32,7 +32,7 @@ Run
 
 ### OSX
 
-Install dependencies: 
+Install dependencies:
 
 * install Qt Creator from http://www.qt.io/download-open-source/. Note that the default install includes support files for iOS; these are not required for OpenIVI Mobility, and take 7GB of disk space, so you may wish to deselect them during install.
 * install the homebrew version of ctags; the stock xcode one will not work: `brew install ctags`
@@ -51,34 +51,17 @@ Run
 	
 	./openivi-html5
 
-## Style
+## Genivi Software Loading Manager Integration
 
-Use the google style:
-http://google-styleguide.googlecode.com/svn/trunk/cppguide.html
-
-Reformat code using the following before checkin:
-
-    clang-format -style google -i filename.cc
-
-## Linting
-
-To use `clang-check` to lint the source tree:
-
-    clang-check -analyze -p build *.cc
-
-## Example
-
-### SLM
-
-Openivi-html5 intgrates with the Genivi Software Management. There are full instructions for running the Genivi Software Manager at its [README](https://github.com/cajun-rat/genivi_software_management) but here are the condensed instructions to run it with openivi-html5.
+Openivi-html5 integrates with a slightly modified version of the Genivi Software Loading Manager.
 
 First, follow the openivi-html5 README instructions to build and run it. After the "Run" step you should see the Getting Started screen.
 
-When that is complete, in a new terminal clone the Genivi Software Management repo somewhere.
+The integration depends on some extra features that are only on our branch of the SLM.
+In a new terminal clone the Genivi Software Management repo:
 
-    git clone git@github.com:cajun-rat/genivi_software_management.git
+    git clone -b feat/hmi-api git@github.com:cajun-rat/genivi_software_management.git
     cd genivi_software_management/
-    git checkout feat/hmi-api
 
 ### OSX additional directions
 
@@ -110,3 +93,18 @@ Now in another new terminal, navigate to genivi_software_management and run:
 You should see the update appear in the openivi-html5 gui along with the text "Awaiting Approval. There are 1 updates available". To start the update hit the "Approve Updates" button.
 
 The openivi-html5 gui should show the update installing, then return to the "There are 0 updates available" state.
+
+## Style
+
+Use the google style:
+http://google-styleguide.googlecode.com/svn/trunk/cppguide.html
+
+Reformat code using the following before checkin:
+
+    clang-format -style google -i *.cc *.h
+
+## Linting
+
+To use `clang-check` to lint the source tree:
+
+    clang-check -analyze -p build *.cc
