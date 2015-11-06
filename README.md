@@ -80,9 +80,24 @@ When that is complete, in a new terminal clone the Genivi Software Management re
     cd genivi_software_management/
     git checkout feat/hmi-api
 
+### OSX additional directions
+
+The software manager and sota client require gtk and dbus, neither of which are available by default on OSX. You can install them using homebrew, though it does require a couple of extra commands.
+
+	brew install pygtk
+	brew install homebrew/python/python-dbus
+	ln -sfv /usr/local/opt/d-bus/*.plist ~/Library/LaunchAgents
+	launchctl load ~/Library/LaunchAgents/org.freedesktop.dbus-session.plist
+
+These four commands should be sufficient for a fresh install, but note that if you've previously had dbus installed, you may need to delete, recreate, and reload the launch agent plist file.
+
 Now start the software loading manager (note that this opens 5 terminals) by running:
 
     sh start_swm.sh
+
+Or, on OSX:
+
+	sh start_swm_osx.sh
 
 Back in the openivi-html5 window, click on the menu item "File -> Open File" and open openivi-html5/example/demo.html
 
