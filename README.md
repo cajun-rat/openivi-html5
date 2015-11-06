@@ -51,14 +51,14 @@ Run
 	
 	./openivi-html5
 
-## Genivi Software Loading Manager Integration
+## GENIVI Software Loading Manager Integration
 
-Openivi-html5 integrates with a slightly modified version of the Genivi Software Loading Manager.
+Openivi-html5 integrates with a slightly modified version of the GENIVI Software Loading Manager.
 
 First, follow the openivi-html5 README instructions to build and run it. After the "Run" step you should see the Getting Started screen.
 
 The integration depends on some extra features that are only on our branch of the SLM.
-In a new terminal clone the Genivi Software Management repo:
+In a new terminal clone the GENIVI Software Management repo:
 
     git clone -b feat/hmi-api git@github.com:cajun-rat/genivi_software_management.git
     cd genivi_software_management/
