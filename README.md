@@ -94,6 +94,13 @@ You should see the update appear in the openivi-html5 gui along with the text "A
 
 The openivi-html5 gui should show the update installing, then return to the "There are 0 updates available" state.
 
+## Remote Debugging
+
+WebKit HTML5 remote debugging is enabled by default on port 9221. With
+openivi-html5 running, just point Google Chrome (or Chromium) at
+http://localhost:9221  This works with remote computers too: just find the
+IP address of the embedded machine with ifconfig.
+
 ## Style
 
 Use the google style:
