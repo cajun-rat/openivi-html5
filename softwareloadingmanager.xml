@@ -12,6 +12,10 @@
     </signal>
     <method name="approve">
     </method>
+    <method name="details">
+      <arg name="res" type="aa{sv}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="InstallDetails"/>
+    </method>
   </interface>
 </node>
 <!-- vim: set expandtab tabstop=2 shiftwidth=2: -->

@@ -9,6 +9,9 @@ SoftwareLoadingManager::SoftwareLoadingManager(QObject *parent)
                                         QDBusConnection::sessionBus(), this))
 
 {
+  qDBusRegisterMetaType<InstallDetail>();
+  qDBusRegisterMetaType<InstallDetails>();
+
   connect(slm_, SIGNAL(update_state_changed(int, int)), this,
           SIGNAL(update_state_changed(int, int)));
 }
@@ -24,3 +27,12 @@ int SoftwareLoadingManager::update_state() {
 }
 
 void SoftwareLoadingManager::approve() { slm_->approve().reply(); }
+
+QVariantList SoftwareLoadingManager::details() {
+  InstallDetails details = slm_->details().value();
+  QVariantList r;
+  for (auto i = details.cbegin(); i != details.cend(); ++i) {
+    r.append(i->contents);
+  }
+  return r;
+}
