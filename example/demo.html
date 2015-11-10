@@ -7,8 +7,14 @@
 <h2>SOTA</h2>
 <p id="update_state">?</p>
 <p>There are <span id="update_count">?</span> updates available</p>
+<table id="details">
+  <thead>
+    <tr><th>Name</th><th>Version</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
 <input id="approve" type="button" value="Approve Updates"/>
-
 <script src="jquery-1.11.3.min.js"></script>
 <script>
 
@@ -25,17 +31,35 @@ update_states_desc[update_states.AWAITING_APPROVAL] = "Awaiting Approval";
 update_states_desc[update_states.INSTALLING] = "Installing";
 update_states_desc[update_states.ERROR] = "Error";
 
+function render_details(table, details) {
+	table.empty();
+	for (var i=0; i<details.length; i++) {
+		var row = $('<tr>');
+		row.append($('<td>').text(details[i].name));
+		row.append($('<td>').text(details[i].version));
+		row.append($('<td>').text(details[i].status));
+		table.append(row);
+	}
+	if (details.length == 0) {
+		table.append($('<td colspan="3">No updates available</td>'));
+	}
+}
 
 function init() {
 	genivi.slm.update_state_changed.connect(function (state,count) {
 		$('#update_state').text(update_states_desc[state]);
 		$('#update_count').text(count);
+		render_details($('#details tbody'), genivi.slm.details());
 	});
 	$('#update_state').text(update_states_desc[genivi.slm.update_state()]);
 	$('#update_count').text(genivi.slm.update_count());
-	$('#approve').click(function () {slm.approve()});
+	$('#approve').click(function () {slm.approve(genivi.slm.details())});
+	render_details($('#details tbody'), genivi.slm.details());
+	genivi.slm.details_changed.connect(function (name, version, state) {
+		// It would be possible to update the table incrementally here
+		render_details($('#details tbody'), genivi.slm.details());
+	});
 }
-
 
 $(init);
 </script>

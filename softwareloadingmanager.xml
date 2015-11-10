@@ -11,11 +11,18 @@
       <arg name="count" type="i"/>
     </signal>
     <method name="approve">
+      <arg name="packages" type="a(ss)"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="PackageIds"/>
     </method>
     <method name="details">
       <arg name="res" type="aa{sv}" direction="out"/>
       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="InstallDetails"/>
     </method>
+    <signal name="details_changed">
+        <arg name="name" type="s"/>
+        <arg name="version" type="s"/>
+        <arg name="newstate" type="s"/>
+    </signal>
   </interface>
 </node>
 <!-- vim: set expandtab tabstop=2 shiftwidth=2: -->

@@ -19,11 +19,13 @@ class SoftwareLoadingManager : public QObject {
 
   Q_INVOKABLE int update_count();
   Q_INVOKABLE int update_state();
-  Q_INVOKABLE void approve();
+  Q_INVOKABLE void approve(QVariantList);
   Q_INVOKABLE QVariantList details();
 
 signals:
   void update_state_changed(int state, int count);
+  void details_changed(QString packageName, QString packageVersion,
+                       QString status);
 
  private:
   org::genivi::software_loading_manager* slm_;
