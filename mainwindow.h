@@ -37,9 +37,12 @@ class MainWindow : public QMainWindow {
   void SetUrl(const QUrl &url);
   // Overriden from QMainWindow
   void keyPressEvent(QKeyEvent *event);
+
+ public slots:
+  void ToggleFullScreen();
+
  private slots:
   void OpenUrlDialog();
-  void ToggleFullScreen();
 
  private:
   Ui::MainWindow *ui_;

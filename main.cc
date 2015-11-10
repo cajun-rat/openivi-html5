@@ -44,6 +44,11 @@ int main(int argc, char *argv[]) {
                                    qtr("Clear settings"));
 
   parser.addOption(clearSettings);
+
+  QCommandLineOption fullScreen(QStringList() << "f" << "full-screen",
+                                  qtr("Start Full Screen"));
+  parser.addOption(fullScreen);
+
   parser.process(a);
 
   if (parser.isSet(clearSettings)) {
@@ -54,6 +59,9 @@ int main(int argc, char *argv[]) {
   QString url_str = parser.value(url);
   MainWindow w(0, QUrl(url_str));
 
+  if (parser.isSet(fullScreen)) {
+    w.ToggleFullScreen();
+  }
   w.show();
   return a.exec();
 }
