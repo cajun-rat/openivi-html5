@@ -30,8 +30,7 @@ MainWindow::MainWindow(QWidget *parent, const QUrl &force_url)
           SLOT(OpenUrlDialog()));
   connect(ui_->action_Quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-  // 'Simulation' buttons
-  connect(ui_->fullscreen_, SIGNAL(clicked()), this, SLOT(ToggleFullScreen()));
+  connect(ui_->action_Full_Screen, SIGNAL(triggered()), this, SLOT(ToggleFullScreen()));
 
   if (force_url.isEmpty()) {
     QSettings settings;
@@ -60,23 +59,10 @@ void MainWindow::ToggleFullScreen() {
   bool shownhide;
   if (isFullScreen()) {
     setWindowState(Qt::WindowNoState);
-    // setCentralWidget(ui_->centralWidget);
     shownhide = true;
   } else {
     setWindowState(Qt::WindowFullScreen);
     shownhide = false;
-  }
-  // Hide everything on the left hand layout
-  int children = ui_->simcontrols_->count();
-  for (int i = 0; i < children; i++) {
-    QWidget *w = ui_->simcontrols_->itemAt(i)->widget();
-    if (w) {
-      if (shownhide) {
-        w->show();
-      } else {
-        w->hide();
-      }
-    }
   }
   if (shownhide) {
     ui_->menuBar_->show();
