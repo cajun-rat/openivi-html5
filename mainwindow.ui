@@ -52,68 +52,6 @@
       </property>
      </widget>
     </item>
-    <item>
-     <layout class="QVBoxLayout" name="simcontrols_">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Geolocate Berlin</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Geolocate Paris</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="fullscreen_">
-        <property name="toolTip">
-         <string>Display the window in full screen (F11)</string>
-        </property>
-        <property name="text">
-         <string>Full Screen</string>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-        <property name="default">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar_">
@@ -133,7 +71,14 @@
     <addaction name="separator"/>
     <addaction name="action_Quit"/>
    </widget>
+   <widget class="QMenu" name="menu_Window">
+    <property name="title">
+     <string>&amp;Window</string>
+    </property>
+    <addaction name="action_Full_Screen"/>
+   </widget>
    <addaction name="menu_File"/>
+   <addaction name="menu_Window"/>
   </widget>
   <widget class="QStatusBar" name="statusBar_"/>
   <action name="action_Quit">
@@ -144,6 +89,14 @@
   <action name="actionOpen_URL">
    <property name="text">
     <string>&amp;Open File...</string>
+   </property>
+  </action>
+  <action name="action_Full_Screen">
+   <property name="text">
+    <string>&amp;Full Screen (F11)</string>
+   </property>
+   <property name="iconText">
+    <string>Full Screen</string>
    </property>
   </action>
  </widget>
