@@ -11,7 +11,7 @@ set(CMAKE_AUTOMOC ON)
 # to always look for includes there:
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(CMAKE_CXX_FLAGS "-std=gnu++0x -Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5WebKitWidgets REQUIRED)
@@ -28,6 +28,8 @@ add_executable(openivi-html5
         main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
         car.cc installdetail.cc packageid.cc
         ${DBUS_FILES} ${RCC_FILES} ${UI_MAINWINDOW})
+
+set_property(TARGET openivi-html5 PROPERTY CXX_STANDARD 11)
 
 qt5_use_modules(openivi-html5 Widgets DBus WebKitWidgets)
 
