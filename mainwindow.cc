@@ -30,7 +30,8 @@ MainWindow::MainWindow(QWidget *parent, const QUrl &force_url)
           SLOT(OpenUrlDialog()));
   connect(ui_->action_Quit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
-  connect(ui_->action_Full_Screen, SIGNAL(triggered()), this, SLOT(ToggleFullScreen()));
+  connect(ui_->action_Full_Screen, SIGNAL(triggered()), this,
+          SLOT(ToggleFullScreen()));
 
   if (force_url.isEmpty()) {
     QSettings settings;

@@ -45,8 +45,9 @@ int main(int argc, char *argv[]) {
 
   parser.addOption(clearSettings);
 
-  QCommandLineOption fullScreen(QStringList() << "f" << "full-screen",
-                                  qtr("Start Full Screen"));
+  QCommandLineOption fullScreen(QStringList() << "f"
+                                              << "full-screen",
+                                qtr("Start Full Screen"));
   parser.addOption(fullScreen);
 
   parser.process(a);
