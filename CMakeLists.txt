@@ -55,4 +55,3 @@ add_custom_target(tags
     COMMAND ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 add_dependencies(openivi-html5 tags)
-
