@@ -27,7 +27,6 @@
 #include "softwareloadingmanager.h"
 
 using org::genivi::software_loading_manager;
-using org::onboard::Onboard::Keyboard;
 
 WebGraphicView::WebGraphicView(QWidget *parent)
     : QGraphicsView(parent),
@@ -36,9 +35,6 @@ WebGraphicView::WebGraphicView(QWidget *parent)
       scene_(new QGraphicsScene(this)),
       webInspector_(new QWebInspector),
       softwareLoadingManager_(new SoftwareLoadingManager(this)),
-      onboard_(new Keyboard("org.onboard.Onboard",
-                            QString("/org/onboard/Onboard/Keyboard"),
-                            QDBusConnection::sessionBus(), this)),
       car_(new Car(this)) {
   page_->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
   page_->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
@@ -73,11 +69,9 @@ void WebGraphicView::FocusUpdate() {
   bool shouldDisplayKeyboard = r.isValid();
   if (keyboardVisible_ != shouldDisplayKeyboard) {
     if (shouldDisplayKeyboard) {
-      auto r = onboard_->Show();
-      r.waitForFinished();
+      virtualKeyboard_.Show();
     } else {
-      auto r = onboard_->Hide();
-      r.waitForFinished();
+      virtualKeyboard_.Hide();
     }
     keyboardVisible_ = shouldDisplayKeyboard;
   }
@@ -86,7 +80,6 @@ void WebGraphicView::FocusUpdate() {
 void WebGraphicView::AddJavascriptObjectsToWindow() {
   page_->currentFrame()->addToJavaScriptWindowObject("slm",
                                                      softwareLoadingManager_);
-  page_->currentFrame()->addToJavaScriptWindowObject("onboard", onboard_);
 
   page_->currentFrame()->evaluateJavaScript("genivi = {slm:slm}");
 

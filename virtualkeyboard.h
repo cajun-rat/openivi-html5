@@ -1,5 +1,5 @@
-#ifndef OPENIVI_WEBGRAPHICVIEW_H_
-#define OPENIVI_WEBGRAPHICVIEW_H_
+#ifndef OPENIVI_VIRTUALKEYBOARD_H_
+#define OPENIVI_VIRTUALKEYBOARD_H_
 
 /*
     OpenIVI HTML5 environment
@@ -20,43 +20,21 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QGraphicsWebView>
-#include <QWebInspector>
-#include <QWebPage>
-
-#include "softwareloadingmanager.h"
-#include "car.h"
-#include "virtualkeyboard.h"
-
-class WebGraphicView : public QGraphicsView {
-  Q_OBJECT
-
+/**
+ * Interface to control the on screen keyboard, matchbox-keyboard.
+ */
+class VirtualKeyboard {
  public:
-  explicit WebGraphicView(QWidget *parent = 0);
-  virtual ~WebGraphicView();
-
-  // overriden from QGraphicsView
-  virtual void resizeEvent(QResizeEvent *event);
-  void SetUrl(const QUrl &url);
-
- public slots:
-  void FocusUpdate();
-
- private slots:
-  void AddJavascriptObjectsToWindow();
+  VirtualKeyboard();
+  ~VirtualKeyboard();
+  void Show() { SendCommand(1); }
+  void Hide() { SendCommand(2); }
 
  private:
-  bool keyboardVisible_;
-  QWebPage *page_;
-  QGraphicsWebView *view_;
-  QGraphicsScene *scene_;
-  QWebInspector *webInspector_;
-  SoftwareLoadingManager *softwareLoadingManager_;
-  VirtualKeyboard virtualKeyboard_;
-  Car *car_;
+  void SendCommand(int);
+  // including <X11/Xlib.h> breaks QT, so use a void* pointer here
+  void *x11Display_;
 };
 
 /* vim: set expandtab tabstop=2 shiftwidth=2: */
-#endif  // OPENIVI_WEBGRAPHICVIEW_H_
+#endif /* OPENIVI_VIRTUALKEYBOARD_H_ */

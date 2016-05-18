@@ -16,18 +16,29 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5WebKitWidgets REQUIRED)
 find_package(Qt5DBus REQUIRED)
+find_package(X11)
 
 qt5_wrap_ui(UI_MAINWINDOW mainwindow.ui)
 
 set_source_files_properties(softwareloadingmanager.xml
     PROPERTIES INCLUDE softwareloadingmanagerdbus.h)
-qt5_add_dbus_interfaces(DBUS_FILES onboard.xml softwareloadingmanager.xml)
+qt5_add_dbus_interfaces(DBUS_FILES softwareloadingmanager.xml)
 qt5_add_resources(RCC_FILES resources/resources.qrc)
+
+# Generate config.h from config.h.in
+configure_file(config.h.in config.h)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(openivi-html5
         main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
         car.cc installdetail.cc packageid.cc
+        virtualkeyboard.cc
         ${DBUS_FILES} ${RCC_FILES} ${UI_MAINWINDOW})
+
+if (X11_FOUND)
+  target_link_libraries(openivi-html5 ${X11_LIBRARIES})
+  include_directories(${X11_INCLUDE_DIR})
+endif(X11_FOUND)
 
 set_property(TARGET openivi-html5 PROPERTY CXX_STANDARD 11)
 
