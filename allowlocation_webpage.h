@@ -1,5 +1,5 @@
-#ifndef OPENIVI_WEBGRAPHICVIEW_H_
-#define OPENIVI_WEBGRAPHICVIEW_H_
+#ifndef OPENIVI_ALLOWGEOLOCATION_WEBPAGE_H_
+#define OPENIVI_ALLOWGEOLOCATION_WEBPAGE_H_
 
 /*
     OpenIVI HTML5 environment
@@ -20,43 +20,17 @@
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QGraphicsWebView>
-#include <QWebInspector>
+#include <QWebPage>
 
-#include "softwareloadingmanager.h"
-#include "car.h"
-#include "virtualkeyboard.h"
-#include "allowlocation_webpage.h"
-
-class WebGraphicView : public QGraphicsView {
+class AllowLocationWebPage : public QWebPage {
   Q_OBJECT
 
  public:
-  explicit WebGraphicView(QWidget *parent = 0);
-  virtual ~WebGraphicView();
-
-  // overriden from QGraphicsView
-  virtual void resizeEvent(QResizeEvent *event);
-  void SetUrl(const QUrl &url);
-
- public slots:
-  void FocusUpdate();
+  AllowLocationWebPage(QObject* parent = 0);
 
  private slots:
-  void AddJavascriptObjectsToWindow();
-
- private:
-  bool keyboardVisible_;
-  AllowLocationWebPage *page_;
-  QGraphicsWebView *view_;
-  QGraphicsScene *scene_;
-  QWebInspector *webInspector_;
-  SoftwareLoadingManager *softwareLoadingManager_;
-  VirtualKeyboard virtualKeyboard_;
-  Car *car_;
+  void permissionRequested(QWebFrame* frame, Feature feature);
 };
 
 /* vim: set expandtab tabstop=2 shiftwidth=2: */
-#endif  // OPENIVI_WEBGRAPHICVIEW_H_
+#endif

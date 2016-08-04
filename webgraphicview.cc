@@ -30,7 +30,7 @@ using org::genivi::software_loading_manager;
 
 WebGraphicView::WebGraphicView(QWidget *parent)
     : QGraphicsView(parent),
-      page_(new QWebPage(this)),
+      page_(new AllowLocationWebPage(this)),
       view_(new QGraphicsWebView),
       scene_(new QGraphicsScene(this)),
       webInspector_(new QWebInspector),
