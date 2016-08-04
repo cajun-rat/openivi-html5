@@ -32,7 +32,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 add_executable(openivi-html5
         main.cc mainwindow.cc webgraphicview.cc softwareloadingmanager.cc
         car.cc installdetail.cc packageid.cc
-        virtualkeyboard.cc
+        virtualkeyboard.cc allowlocation_webpage.cc
         ${DBUS_FILES} ${RCC_FILES} ${UI_MAINWINDOW})
 
 if (X11_FOUND)
