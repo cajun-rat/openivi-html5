@@ -28,6 +28,7 @@ QString qtr(const char *key) {
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
+  QApplication::setOrganizationName("OpenIVI");
   QApplication::setApplicationName("openivi");
 
   QCommandLineParser parser;
