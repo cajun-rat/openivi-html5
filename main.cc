@@ -61,10 +61,11 @@ int main(int argc, char *argv[]) {
   QString url_str = parser.value(url);
   MainWindow w(0, QUrl(url_str));
 
+  w.show();
+
   if (parser.isSet(fullScreen)) {
     w.ToggleFullScreen();
   }
-  w.show();
   return a.exec();
 }
 /* vim: set expandtab tabstop=2 shiftwidth=2: */
