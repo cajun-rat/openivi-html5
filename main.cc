@@ -59,6 +59,11 @@ int main(int argc, char *argv[]) {
   }
 
   QString url_str = parser.value(url);
+  if ( (false == url_str.startsWith("http://", Qt::CaseInsensitive)) &&
+       (false == url_str.startsWith("https://", Qt::CaseInsensitive)) &&
+       (false == url_str.startsWith("file://", Qt::CaseInsensitive)) ) {
+    url_str = "file://" + url_str;
+  }
   MainWindow w(0, QUrl(url_str));
 
   w.show();
